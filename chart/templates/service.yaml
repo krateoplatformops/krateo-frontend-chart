@@ -11,8 +11,8 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
-      {{- if and (or (eq .Values.service.type "NodePort") (eq .Values.service.type "LoadBalancer")) .Values.service.nodePort}}
+      {{- if eq .Values.service.type "NodePort" }}
       nodePort: {{ .Values.service.nodePort }}
-      {{- end }}
+      {{- end }}  
   selector:
     {{- include "krateo-frontend.selectorLabels" . | nindent 4 }}
