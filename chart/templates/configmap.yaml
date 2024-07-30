@@ -17,4 +17,6 @@ data:
 {{- end }}
 {{- $_ := set $local "first" false -}}
 {{- end -}}
-    }}
+    },
+    "params":{"FRONTEND_NAMESPACE": "{{ .Release.Namespace }}"}
+    }
