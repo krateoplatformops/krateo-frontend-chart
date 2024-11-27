@@ -8,7 +8,7 @@ data:
   config.json: |
     {"api":{
 {{- $local := dict "first" true -}}
-{{- range $k, $v := .Values.env -}}
+{{- range $k, $v := .Values.config -}}
 {{- if not $local.first -}},{{- end -}}
 {{- if kindIs "string" $v }}
   {{ quote $k | indent 6 }}: {{ quote $v }}
@@ -20,3 +20,14 @@ data:
     },
     "params":{"FRONTEND_NAMESPACE": "{{ .Release.Namespace }}"}
     }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "krateo-frontend.fullname" . }}
+  labels:
+    {{- include "krateo-frontend.labels" . | nindent 4 }}
+data:
+  {{- range $key, $value := .Values.env }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}

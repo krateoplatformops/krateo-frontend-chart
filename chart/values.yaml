@@ -94,7 +94,7 @@ tolerations: []
 
 affinity: {}
 
-env:
+config:
   BFF_API_BASE_URL: http://localhost:8081
   AUTHN_API_BASE_URL: http://localhost:8082
   EVENTS_PUSH_API_BASE_URL: http://localhost:8083
