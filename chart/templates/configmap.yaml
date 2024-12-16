@@ -19,7 +19,7 @@ data:
 {{- end -}}
     },
     "params":{
-      "FRONTEND_NAMESPACE": "{{ .Release.Namespace }}"
+      "FRONTEND_NAMESPACE": "{{ .Release.Namespace }}",
       "DELAY_SAVE_NOTIFICATION": "10000"
       }
     }
