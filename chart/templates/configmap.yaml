@@ -18,7 +18,10 @@ data:
 {{- $_ := set $local "first" false -}}
 {{- end -}}
     },
-    "params":{"FRONTEND_NAMESPACE": "{{ .Release.Namespace }}"}
+    "params":{
+      "FRONTEND_NAMESPACE": "{{ .Release.Namespace }}"
+      "DELAY_SAVE_NOTIFICATION": "10000"
+      }
     }
 ---
 apiVersion: v1
