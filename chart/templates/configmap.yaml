@@ -7,7 +7,6 @@ metadata:
 data:
   config.json: |
     {"api":{
-        "INIT": "/call?apiVersion=templates.krateo.io%2Fv1alpha1&resource=collections&name=menu&namespace={{ .Release.Namespace }}",
 {{- $local := dict "first" true -}}
 {{- range $k, $v := .Values.config -}}
 {{- if not $local.first -}},{{- end -}}
