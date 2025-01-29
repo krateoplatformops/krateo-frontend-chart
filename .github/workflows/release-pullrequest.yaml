@@ -17,7 +17,9 @@ jobs:
           echo "TRIMMED_NAME=$TRIMMED_NAME" >> $GITHUB_ENV  # Store in environment variable
 
       - name: Use the Stored Variable
-        run: echo "Trimmed Repository Name: ${{ env.TRIMMED_NAME }}"
+        run: echo "Trimmed Repository Name: $TRIMMED_NAME"
+        env:
+          TRIMMED_NAME: ${{ env.TRIMMED_NAME }}
 
       - name: Authenticate with GitHub App
         id: authenticate
