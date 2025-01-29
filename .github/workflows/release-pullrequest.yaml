@@ -10,15 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Extract and Store Repository Name
+      - name: Extract and Store Trimmed Repository Name
         run: |
           REPO_NAME="${{ github.repository }}"
-          REPO_NAME="${REPO_NAME##*/}"  # Extract only the repository name (without owner)
           TRIMMED_NAME="${REPO_NAME%-chart}"  # Remove "-chart" suffix if present
           echo "TRIMMED_NAME=$TRIMMED_NAME" >> $GITHUB_ENV  # Store in environment variable
 
       - name: Use the Stored Variable
-        run: echo "Trimmed Repository Name is $TRIMMED_NAME"
+        run: echo "Trimmed Repository Name: ${{ env.TRIMMED_NAME }}"
 
       - name: Authenticate with GitHub App
         id: authenticate
