@@ -10,6 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Extract and Store Repository Name
+        run: |
+          REPO_NAME="${{ github.repository }}"
+          REPO_NAME="${REPO_NAME##*/}"  # Extract only the repository name (without owner)
+          TRIMMED_NAME="${REPO_NAME%-chart}"  # Remove "-chart" suffix if present
+          echo "TRIMMED_NAME=$TRIMMED_NAME" >> $GITHUB_ENV  # Store in environment variable
+
+      - name: Use the Stored Variable
+        run: echo "Trimmed Repository Name is $TRIMMED_NAME"
+
       - name: Authenticate with GitHub App
         id: authenticate
         uses: tibdex/github-app-token@v1
@@ -21,13 +31,13 @@ jobs:
         uses: tdemin/find-latest-tag@v1
         id: app_version
         with:
-          repo: https://${{ steps.authenticate.outputs.token }}@github.com/krateoplatformops/krateo-frontend.git
+          repo: https://${{ steps.authenticate.outputs.token }}@github.com/${{ github.repository }}.git
 
       - name: Extract latest Chart Version
         uses: tdemin/find-latest-tag@v1
         id: chart_version
         with:
-          repo: https://${{ steps.authenticate.outputs.token }}@github.com/krateoplatformops/krateo-frontend-chart.git
+          repo: https://${{ steps.authenticate.outputs.token }}@github.com/$TRIMMED_NAME.git
 
       - name: Checkout
         uses: actions/checkout@v3
