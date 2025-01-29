@@ -37,7 +37,7 @@ jobs:
         uses: tdemin/find-latest-tag@v1
         id: chart_version
         with:
-          repo: https://${{ steps.authenticate.outputs.token }}@github.com/$TRIMMED_NAME.git
+          repo: https://${{ steps.authenticate.outputs.token }}@github.com/${{ env.TRIMMED_NAME }}.git
 
       - name: Checkout
         uses: actions/checkout@v3
